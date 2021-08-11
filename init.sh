@@ -1,6 +1,6 @@
 #!/bin/bash
 
-nonRootUsername = tim
+nonRootUsername=tim
 
 # server updates
 sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
