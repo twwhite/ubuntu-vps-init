@@ -6,7 +6,7 @@ nonRootUsername=tim
 sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
 
 # PHP and modules
-sudo apt install -y php php-mbstring php-xml zip
+sudo apt install -y php php-mbstring php-xml zip unzip php-zip
 
 # Docker
 sudo apt install -y php apt-transport-https ca-certificates curl gnupg lsb-release
