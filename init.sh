@@ -21,6 +21,7 @@ echo "UFW enabled & ssh, http, https allowed"
 
 # Add non-root user & copy root key
 sudo adduser tim
+sudo usergroup -aG sudo tim
 mkdir /home/tim/.ssh
 sudo cp /root/.ssh/authorized_keys /home/tim/.ssh/
 chown -R tim:tim /home/tim/.ssh
