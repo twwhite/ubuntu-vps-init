@@ -13,6 +13,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
+
 sudo groupadd docker
 
 # UFW firewall
@@ -25,7 +26,7 @@ echo "UFW enabled & ssh, http, https allowed"
 # Add non-root user & copy root key
 sudo adduser $nonRootUsername
 sudo usermod -aG sudo $nonRootUsername
-sudo usermod -aG sudo $nonRootUsername
+sudo usermod -aG docker $nonRootUsername
 
 mkdir /home/$nonRootUsername/.ssh
 sudo cp /root/.ssh/authorized_keys /home/$nonRootUsername/.ssh/
@@ -39,3 +40,7 @@ sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
 echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
 echo 'PermitRootLogin no' >> /etc/ssh/sshd_config
 service ssh restart
+
+echo "Rebooting..."
+
+sudo reboot
