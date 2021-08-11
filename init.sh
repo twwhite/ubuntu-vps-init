@@ -1,5 +1,7 @@
 #!/bin/bash
 
+nonRootUsername = tim
+
 # server updates
 sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
 
@@ -11,6 +13,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo groupadd docker
 
 # UFW firewall
 sudo ufw allow ssh
@@ -20,13 +23,15 @@ sudo ufw enable
 echo "UFW enabled & ssh, http, https allowed"
 
 # Add non-root user & copy root key
-sudo adduser tim
-sudo usergroup -aG sudo tim
-mkdir /home/tim/.ssh
-sudo cp /root/.ssh/authorized_keys /home/tim/.ssh/
-chown -R tim:tim /home/tim/.ssh
-chmod 700 /home/tim/.ssh
-chmod 600 /home/tim/.ssh/authorized_keys
+sudo adduser $nonRootUsername
+sudo usermod -aG sudo $nonRootUsername
+sudo usermod -aG sudo $nonRootUsername
+
+mkdir /home/$nonRootUsername/.ssh
+sudo cp /root/.ssh/authorized_keys /home/$nonRootUsername/.ssh/
+chown -R $nonRootUsername:$nonRootUsername /home/$nonRootUsername/.ssh
+chmod 700 /home/$nonRootUsername/.ssh
+chmod 600 /home/$nonRootUsername/.ssh/authorized_keys
 
 # ssh: disallow passwords & root login
 sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config
