@@ -2,11 +2,9 @@
 
 nonRootUsername=tim
 
-# server updates
-sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
-
-# PHP and modules
-sudo apt install -y php php-mbstring php-xml zip unzip php-zip
+# Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
 # Docker
 sudo apt install -y php apt-transport-https ca-certificates curl gnupg lsb-release
@@ -14,10 +12,9 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
 
-sudo groupadd docker
+sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
+sudo apt install -y php php-mbstring php-xml zip unzip php-zip docker-ce docker-ce-cli containerd.io
 
 # UFW firewall
 sudo ufw allow ssh
@@ -27,6 +24,7 @@ sudo ufw enable
 echo "UFW enabled & ssh, http, https allowed"
 
 # Add non-root user & copy root key
+sudo groupadd docker
 sudo adduser $nonRootUsername
 sudo usermod -aG sudo $nonRootUsername
 sudo usermod -aG docker $nonRootUsername
