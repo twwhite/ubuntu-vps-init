@@ -43,6 +43,17 @@ echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
 echo 'PermitRootLogin no' >> /etc/ssh/sshd_config
 service ssh restart
 
+# Check if root data directory exists, e.g. has been successfully mounted
+check_file="twio_data_root_dir"
+found=$(find / -name $check_file)
+if [ -n "$found" ]; then
+        dir=${found::-${#check_file}}
+        echo "Root data dir found at $dir"
+        echo $dir >> /home/$nonRootUsername/twio_data_root_ref
+else
+        echo "Root data dir not found."
+fi
+
 echo "Rebooting..."
 
 sudo reboot
