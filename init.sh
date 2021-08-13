@@ -28,6 +28,7 @@ sudo groupadd docker
 sudo adduser $nonRootUsername
 sudo usermod -aG sudo $nonRootUsername
 sudo usermod -aG docker $nonRootUsername
+sudo usermod -aG www-data $nonRootUsername
 
 mkdir /home/$nonRootUsername/.ssh
 sudo cp /root/.ssh/authorized_keys /home/$nonRootUsername/.ssh/
