@@ -54,6 +54,11 @@ else
         echo "Root data dir not found."
 fi
 
+service nginx stop
+systemctl disable nginx
+service apache2 stop
+systemctl disable apache2
+
 echo "Rebooting..."
 
 sudo reboot
