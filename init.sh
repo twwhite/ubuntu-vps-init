@@ -14,7 +14,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
-sudo apt install -y borgbackup php php-mbstring php-xml php-curl zip unzip php-zip docker-ce docker-ce-cli containerd.io
+sudo apt install -y rclone borgbackup php php-mbstring php-xml php-curl zip unzip php-zip docker-ce docker-ce-cli containerd.io
 
 # UFW firewall
 sudo ufw allow ssh
