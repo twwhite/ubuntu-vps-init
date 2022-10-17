@@ -19,6 +19,14 @@ echo \
 sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
 sudo apt install -y rclone borgbackup php php-mbstring php-xml php-curl ffmpeg zip unzip php-zip docker-ce docker-ce-cli containerd.io
 
+# zsh, oh my zsh, zshrc, batcat
+sudo apt install -y zsh bat
+sudo -u $nonRootUsername sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo -u $nonRootUsername mkdir -p /home/$nonRootUsername/.local/bin
+sudo -u $nonRootUsername ln -s /usr/bin/batcat /home/$nonRootUsername/.local/bin/bat
+sudo -u $nonRootUsername chsh -s /usr/bin/zsh root
+
+
 # UFW firewall
 sudo ufw allow ssh
 sudo ufw allow http
