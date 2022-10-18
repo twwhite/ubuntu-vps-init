@@ -69,7 +69,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Other essentials for remote host
-sudo apt install -y rclone borgbackup php php-mbstring php-xml php-curl ffmpeg zip unzip php-zip
+sudo apt install -y vim rclone borgbackup php php-mbstring php-xml php-curl ffmpeg zip unzip php-zip
 sudo apt install docker-ce docker-ce-cli containerd.io
 
 # Check if root data directory exists, e.g. has been successfully mounted
