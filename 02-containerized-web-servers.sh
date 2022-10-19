@@ -20,10 +20,10 @@ sudo -u $nonRootUsername ln -s /usr/bin/batcat /home/$nonRootUsername/.local/bin
 sudo -u $nonRootUsername chsh -s /usr/bin/zsh root
 
 # ssh: disallow passwords & root login
-sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config
-sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
-echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
-echo 'PermitRootLogin no' >> /etc/ssh/sshd_config
+sudo sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config
+sudo sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
+sudo echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
+sudo echo 'PermitRootLogin no' >> /etc/ssh/sshd_config
 service ssh restart
 
 # Docker
@@ -51,20 +51,20 @@ sudo apt install -y vim rclone borgbackup php php-mbstring php-xml php-curl ffmp
 sudo apt install docker-ce docker-ce-cli containerd.io
 
 # Check if root data directory exists, e.g. has been successfully mounted
-check_file="twio_data_root_dir"
-found=$(find / -name $check_file)
-if [ -n "$found" ]; then
-        dir=${found::-${#check_file}}
-        echo "Root data dir found at $dir"
-        echo $dir >> /home/$nonRootUsername/twio_data_root_ref
-else
-        echo "Root data dir not found."
-fi
+#check_file="twio_data_root_dir"
+#found=$(find / -name $check_file)
+#if [ -n "$found" ]; then
+#        dir=${found::-${#check_file}}
+#        echo "Root data dir found at $dir"
+#        echo $dir >> /home/$nonRootUsername/twio_data_root_ref
+#else
+#        echo "Root data dir not found."
+#fi
 
-service nginx stop
-systemctl disable nginx
-service apache2 stop
-systemctl disable apache2
+sudo service nginx stop
+sudo systemctl disable nginx
+sudo service apache2 stop
+sudo systemctl disable apache2
 
 echo "Rebooting..."
 sudo reboot
