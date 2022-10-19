@@ -9,7 +9,8 @@ echo "Up to date."
 
 # Add non_root_user to appropriate groups
 sudo groupadd docker
-sudo usermod -aG sudo docker www-data $NON_ROOT_USER
+sudo usermod -aG docker $NON_ROOT_USER
+sudo usermod -aG www-data $NON_ROOT_USER
 
 # zsh, oh my zsh, zshrc, batcat
 sudo apt install -y zsh bat
