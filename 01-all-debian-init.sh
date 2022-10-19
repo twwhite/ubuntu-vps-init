@@ -5,12 +5,14 @@ NON_ROOT_USER=tim
 DIST=$(awk -F= '/^NAME/{print $2};' /etc/os-release)
 apt install -y sudo ssh
 sudo timedatectl set-timezone America/Los_Angeles
-sudo apt update && sudo apt -y upgrade && sudo apt autoremove && sudo apt autoclean 
+sudo apt update && sudo apt -y upgrade && sudo apt autoremove && sudo apt autoclean
 echo "Up to date!"
 
 # UFW firewall
 sudo apt install -y ufw
-sudo ufw allow ssh http https
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
 sudo ufw enable
 echo "UFW enabled with ssh, http, https allowed"
 
@@ -32,4 +34,4 @@ echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILwLqOxPSMliEIreWGLD0fX/h90JGz5P4MDIwI
 service ssh restart
 
 # Other Essentials
-sudo apt install vim zip unzip
+sudo apt install -y vim zip unzip
