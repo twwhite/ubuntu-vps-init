@@ -3,7 +3,7 @@
 # Server basics
 NON_ROOT_USER=tim
 DIST=$(awk -F= '/^NAME/{print $2};' /etc/os-release)
-apt install -y sudo
+apt install -y sudo ssh
 sudo timedatectl set-timezone America/Los_Angeles
 sudo apt update && sudo apt -y upgrade && sudo apt autoremove && sudo apt autoclean 
 echo "Up to date!"
