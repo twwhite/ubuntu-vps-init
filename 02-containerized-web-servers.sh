@@ -1,38 +1,15 @@
 #!/bin/bash
 
-nonRootUsername=tim
-dist=$(awk -F= '/^NAME/{print $2};' /etc/os-release)
+NON_ROOT_USER=tim
+DIST=$(awk -F= '/^NAME/{print $2};' /etc/os-release)
 
+# Updates
+sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean
+echo "Up to date."
 
-
-# If for whatever reason...
-apt install -y  sudo curl ssh
-
-sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
-
-# Set Timezone America/New_York
-sudo timedatectl set-timezone America/Los_Angeles
-
-# UFW firewall
-sudo apt install -y ufw
-sudo ufw allow ssh
-sudo ufw allow http
-sudo ufw allow https
-sudo ufw enable
-echo "UFW enabled & ssh, http, https allowed"
-
-# Add non-root user & copy root key (Assumes vps provider preloads this ssh key, otherwise need to add it manually)
+# Add non_root_user to appropriate groups
 sudo groupadd docker
-sudo adduser $nonRootUsername
-sudo usermod -aG sudo $nonRootUsername
-sudo usermod -aG docker $nonRootUsername
-sudo usermod -aG www-data $nonRootUsername
-
-mkdir /home/$nonRootUsername/.ssh
-sudo cp /root/.ssh/authorized_keys /home/$nonRootUsername/.ssh/
-chown -R $nonRootUsername:$nonRootUsername /home/$nonRootUsername/.ssh
-chmod 700 /home/$nonRootUsername/.ssh
-chmod 600 /home/$nonRootUsername/.ssh/authorized_keys
+sudo usermod -aG sudo docker www-data $NON_ROOT_USER
 
 # zsh, oh my zsh, zshrc, batcat
 sudo apt install -y zsh bat
