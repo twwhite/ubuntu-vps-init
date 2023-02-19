@@ -34,8 +34,8 @@ $ git clone https://github.com/twwhite/ubuntu-vps-init
 # Change directory into the repository
 $ cd ubuntu-vps-init
 
-# Run the script
-$ ./init.sh
+# Run the appropriate init script(s)
+$ ./01-all-debian-init.sh
 ```
 Note: You may need to modify file permissions to permit execute by running chmod +x.
 
