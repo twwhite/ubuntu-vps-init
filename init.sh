@@ -1,6 +1,7 @@
 #!/bin/bash
 
 nonRootUsername=tim
+extMountDir=/mnt/twio
 
 # Docker Compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -18,6 +19,7 @@ echo \
 
 sudo apt update && sudo apt -y upgrade && sudo apt autoremove && apt autoclean && echo "Up to date."
 sudo apt install -y rclone borgbackup php php-mbstring php-xml php-curl ffmpeg zip unzip php-zip docker-ce docker-ce-cli containerd.io
+sudo apt install sshfs
 
 # UFW firewall
 sudo ufw allow ssh
@@ -46,16 +48,8 @@ echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
 echo 'PermitRootLogin no' >> /etc/ssh/sshd_config
 service ssh restart
 
-# Check if root data directory exists, e.g. has been successfully mounted
-check_file="twio_data_root_dir"
-found=$(find / -name $check_file)
-if [ -n "$found" ]; then
-        dir=${found::-${#check_file}}
-        echo "Root data dir found at $dir"
-        echo $dir >> /home/$nonRootUsername/twio_data_root_ref
-else
-        echo "Root data dir not found."
-fi
+mkdir $extMountDir
+chown -R $nonRootUsername:$nonRootUsername $extMountDir
 
 service nginx stop
 systemctl disable nginx
