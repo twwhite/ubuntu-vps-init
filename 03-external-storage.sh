@@ -15,8 +15,8 @@ fi
 sudo mkdir -p $EXT_MOUNT_DIR
 sudo chown -R $NON_ROOT_USER:$NON_ROOT_USER $EXT_MOUNT_DIR
 
-read -p "Enter Remote Server: "
-read -p "Enter Remote User: "
+read -p "Enter Remote Server: " REMOTE_SERVER
+read -p "Enter Remote User: " REMOTE_USER
 
 # Enable auto-mount on reboot
 echo "== Enabling Auto-mount on Reboot =="
