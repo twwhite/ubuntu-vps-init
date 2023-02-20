@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NON_ROOT_USER=tim
-EXT_MOUNT_DIR=/mnt/twio
+EXT_MOUNT_DIR=/home/$NON_ROOT_USER/twio
 REMOTE_BASE_DIR=/0
 
 sudo mkdir -p $EXT_MOUNT_DIR
