@@ -35,10 +35,18 @@ echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILwLqOxPSMliEIreWGLD0fX/h90JGz5P4MDIwI
 service ssh restart
 
 # Other Essentials
-sudo apt install -y vim zip unzip sshfs
+sudo apt install -y vim zip unzip sshfs cifs-utils
 
 # Syncthing
 sudo curl -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
 sudo apt-get update
 sudo apt-get install syncthing
+
+# Services
+mkdir -p /home/$NON_ROOT_USER/.config/systemd/
+cp -r ./services/user/* /home/$NON_ROOT_USER/.config/systemd/
+
+cd /home/$NON_ROOT_USER/.config/systemd
+systemctl --user start  *
+systemctl --user enable *
