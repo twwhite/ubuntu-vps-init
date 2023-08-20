@@ -20,6 +20,10 @@ echo "UFW enabled with ssh, http, https allowed"
 sudo adduser $NON_ROOT_USER
 sudo usermod -aG sudo $NON_ROOT_USER
 
+# Fail2ban
+sudo apt install -y fail2ban
+echo "Fail2ban installed and started with default settings"
+
 # SSH setup
 mkdir /home/$NON_ROOT_USER/.ssh
 chown -R $NON_ROOT_USER:$NON_ROOT_USER /home/$NON_ROOT_USER/.ssh
