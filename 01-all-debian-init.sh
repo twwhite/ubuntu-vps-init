@@ -50,3 +50,6 @@ cp -r ./services/user/* /home/$NON_ROOT_USER/.config/systemd/
 cd /home/$NON_ROOT_USER/.config/systemd
 systemctl --user start  *
 systemctl --user enable *
+
+# Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
