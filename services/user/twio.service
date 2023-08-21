@@ -1,0 +1,14 @@
+[Unit]
+Description=TWIO Docker Applications
+After=network.target
+
+[Service]
+Type=oneshot
+User=tim
+WorkingDirectory=/home/tim/twio/scripts/docker/core
+ExecStart=/home/tim/twio/scripts/docker/core/run.sh
+ExecStop=/home/tim/twio/scripts/docker/core/stop.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

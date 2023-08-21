@@ -55,8 +55,7 @@ sudo apt-get update
 sudo apt-get install syncthing
 
 # Services
-mkdir -p /home/$NON_ROOT_USER/.config/systemd/
-cp -r ./services/user/* /home/$NON_ROOT_USER/.config/systemd/
+cp -r ./services/user/* /etc/systemd/user/
 
 cd /home/$NON_ROOT_USER/.config/systemd
 systemctl --user start  *
