@@ -39,7 +39,7 @@ echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILwLqOxPSMliEIreWGLD0fX/h90JGz5P4MDIwI
 service ssh restart
 
 # Other Essentials
-sudo apt install -y vim zip unzip sshfs cifs-utils
+sudo apt install -y vim zip unzip sshfs cifs-utils apache2-utils
 
 # Create Swap File
 sudo fallocate -l 8G /swapfile
